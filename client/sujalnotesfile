@@ -1,0 +1,60 @@
+react router dom
+lucide-react
+
+react hot toast = notification
+
+react-player = videos
+
+clerk = for authentication
+npm install @clerk/clerk-react
+
+
+1. <UserButton> — the user avatar & dropdown
+This renders the authenticated user’s profile avatar
+
+When clicked, it opens a dropdown menu
+
+Provided by Clerk
+
+By default, this menu contains items like:
+
+Manage account
+
+Sign out
+
+
+2. <UserButton.MenuItems> — extend the dropdown
+This component lets you add custom menu items
+
+Anything inside it appears inside the user dropdown
+
+You are extending, not replacing, Clerk’s menu
+
+3. <UserButton.Action> — custom clickable action
+What each prop does
+label
+label="My Bookings"
+
+
+Text shown in the menu
+
+labelIcon
+labelIcon={<TicketPlus width={15} />}
+
+
+Icon displayed next to the label
+
+TicketPlus is from lucide-react
+
+width={15} controls icon size
+
+onClick
+onClick={() => navigate('/my-bookings')}
+
+
+Executes when the menu item is clicked
+
+Uses React Router’s navigate
+
+Redirects the user to /my-bookings
+
