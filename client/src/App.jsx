@@ -9,6 +9,7 @@ import Favourite from './pages/Favourite'
 import { Toaster } from 'react-hot-toast'
 import Footer from './components/Footer'
 import MyBookings from './pages/MyBookings'
+import HeroSection from './components/HeroSection'
 
 const App = () => {
 

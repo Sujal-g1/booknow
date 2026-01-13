@@ -20,7 +20,7 @@ const Navbar = () => {
       {/* logo */}
       <Link to='/' className='max-md:flex-1 '>
     <img src={assets.logo1} alt=""  
-    className='w-50  h-auto'/>
+    className='lg:w-50 w-35 h-auto'/>
       </Link>
 
       {/* menu items */}

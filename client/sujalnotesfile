@@ -58,3 +58,22 @@ Uses React Router’s navigate
 
 Redirects the user to /my-bookings
 
+
+
+-----------
+Swiper for carousel on home page
+npm i swiper
+
+Swiper handles:
+
+sliding animation
+
+autoplay
+
+swipe gestures
+
+arrows
+
+dots
+
+accessibility
