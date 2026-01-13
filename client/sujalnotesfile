@@ -77,3 +77,11 @@ arrows
 dots
 
 accessibility
+
+-------------
+headless ui = navbar hover dropdown
+npm install @headlessui/react
+
+Clicking the PopoverButton will automatically open/close the PopoverPanel. When the panel is open, clicking anywhere outside of its contents, pressing the Escape key, or tabbing away from it will close the popover.
+
+npm install @heroicons/react
