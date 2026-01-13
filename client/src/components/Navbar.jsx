@@ -4,12 +4,18 @@ import { assets } from '../assets/assets'
 import { MenuIcon, SearchIcon, TicketPlus, X } from 'lucide-react'
 import { useClerk, UserButton, useUser } from '@clerk/clerk-react'
 
-import { Menu, MenuButton, MenuItem, MenuItems , Portal } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import NavDropdown from './NavDropdown'
+
 
 const Navbar = () => {
 
-  const [isOpen, setIsOpen] = useState(false);
+const [isOpen, setIsOpen] = useState(false)
+const [isAnyDropdownOpen, setIsAnyDropdownOpen] = useState(false);
+
+// Dynamic shadow class
+  const shadowClass = isAnyDropdownOpen 
+    ? 'shadow-orange-600/40 shadow-xl'  // Color when dropdown is open
+    : 'shadow-white/20 shadow-lg';   // Default color
 
   const {user} =  useUser()
   const {openSignIn} = useClerk()
@@ -18,7 +24,7 @@ const Navbar = () => {
 
 
   return (
-    <div className='fixed top-0 left-0 z-[100] w-full flex items-center justify-between px-6 md:px-16 lg:px-36 py-5'>
+    <div className='fixed top-0 left-0 z-100 w-full flex items-center justify-between px-6 md:px-16 lg:px-36 py-5'>
 
       {/* logo */}
       <Link to='/' className='max-md:flex-1 '>
@@ -27,7 +33,7 @@ const Navbar = () => {
       </Link>
 
       {/* menu items */}
-     <div className={`max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium max-md:text-lg z-50 flex flex-col md:flex-row items-center max-md:justify-center gap-8 min-md:px-8 py-3 max-md:h-screen min-md:rounded-full backdrop-blur bg-black/70 md:bg-white/10 md:border border-gray-300/20 overflow-hidden transition-[width] duration-300 
+     <div className={`max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium max-md:text-lg z-50 flex flex-col md:flex-row items-center max-md:justify-center gap-8 min-md:px-8 py-3 max-md:h-screen min-md:rounded-full backdrop-blur bg-black/70 md:bg-white/10 md:border border-gray-300/20 overflow-hidden transition-[width] duration-300 ${shadowClass}
     ${isOpen ? 'max-md:w-full' : 'max-md:w-0'}  
     `}>
       <X 
@@ -36,63 +42,48 @@ const Navbar = () => {
 
       <Link onClick={()=>{ scrollTo(0,0) , setIsOpen(false)}}  to='/'>Home</Link>
 
-      <Menu as="div" className="relative inline-block">
-      <MenuButton className='focus:ring-0 focus:outline-none'> Movies </MenuButton>
+      <NavDropdown 
+          title="Movies" 
+          setIsOpen={setIsOpen} 
+          setIsAnyDropdownOpen={setIsAnyDropdownOpen}
+          items={[
+            { label: 'All Movies', path: '/movies' },
+            { label: 'Trending', path: '/movies' }
+          ]} 
+        />
 
-      <Portal>
-      <MenuItems
-        transition
-        anchor="bottom"
-        className="absolute right-0 z-10 mt-4 w-60  origin-top-right rounded-md outline-1 outline-black/5 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in backdrop-blur bg-white/20   "
-      >
-        <div className="py-4">
-          <MenuItem>
-            <a
-              href="#"
-              className="block px-4 py-2 text-lg text-white data-focus:text-white data-focus:outline-hidden dark:text-white  dark:data-focus:bg-white/5 dark:data-focus:text-white"
-            >
-            <Link onClick={()=>{ scrollTo(0,0) , setIsOpen(false)}}  to='/movies'>Movies</Link>
-            </a>
-          </MenuItem>
+        <NavDropdown 
+          title="Theatres" 
+          setIsOpen={setIsOpen} 
+          setIsAnyDropdownOpen={setIsAnyDropdownOpen}
+          items={[
+            { label: 'Nearby', path: '/theatres' },
+            { label: 'IMAX', path: '/theatres' }
+          ]} 
+        />
 
-            <MenuItem>
-            <a
-              href="#"
-              className="block px-4 py-2 text-lg text-white data-focus:text-white data-focus:outline-hidden dark:text-white  dark:data-focus:bg-white/5 dark:data-focus:text-white"
-            >
-            <Link onClick={()=>{ scrollTo(0,0) , setIsOpen(false)}}  to='/movies'>Movies</Link>
-            </a>
-          </MenuItem>
+        <NavDropdown 
+          title="Releases" 
+          setIsOpen={setIsOpen} 
+          setIsAnyDropdownOpen={setIsAnyDropdownOpen}
+          items={[
+            { label: 'Upcoming', path: '/releases' },
+            { label: 'New Arrival', path: '/releases' }
+          ]} 
+        />
 
-            <MenuItem>
-            <a
-              href="#"
-              className="block px-4 py-2 text-lg text-white data-focus:text-white data-focus:outline-hidden dark:text-white  dark:data-focus:bg-white/5 dark:data-focus:text-white"
-            >
-              <Link onClick={()=>{ scrollTo(0,0) , setIsOpen(false)}}  to='/movies'>Movies</Link>
-            </a>
-          </MenuItem>
+        <NavDropdown 
+          title="Favourites" 
+          setIsOpen={setIsOpen} 
+          setIsAnyDropdownOpen={setIsAnyDropdownOpen}
+          items={[
+            { label: 'Upcoming', path: '/releases' },
+            { label: 'New Arrival', path: '/releases' }
+          ]} 
+        />
+      
 
-            <MenuItem>
-            <a
-              href="#"
-              className="block px-4 py-2 text-lg text-white data-focus:text-white data-focus:outline-hidden dark:text-white  dark:data-focus:bg-white/5 dark:data-focus:text-white"
-            >
-            <Link onClick={()=>{ scrollTo(0,0) , setIsOpen(false)}}  to='/movies'>Movies</Link>
-            </a>
-          </MenuItem>
-         
-          
-        
-        </div>
-      </MenuItems>
-      </Portal>
-    </Menu>
-
-      <Link onClick={()=>{ scrollTo(0,0) , setIsOpen(false)}}  to='/'>Theaters </Link>
-      <Link onClick={()=>{ scrollTo(0,0) , setIsOpen(false)}}  to='/'>Releases</Link>
-      <Link onClick={()=>{ scrollTo(0,0) , setIsOpen(false)}}  to='/favourite'>Favourites</Link>
-
+    
       
      </div>
 
