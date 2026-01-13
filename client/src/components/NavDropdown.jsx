@@ -5,12 +5,18 @@ import { Menu, MenuButton, MenuItem, MenuItems, Portal } from '@headlessui/react
 const NavDropdown = ({ title, items, setIsOpen , setIsAnyDropdownOpen}) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Helper to handle both local and parent state
   const handleHover = (state) => {
-    setIsHovered(state);
-    setIsAnyDropdownOpen(state);
+    if (state) {
+      setIsHovered(true);
+      setIsAnyDropdownOpen(true);
+    } else {
+      // Small delay prevents flickering when moving from button to menu
+      setTimeout(() => {
+        setIsHovered(false);
+        setIsAnyDropdownOpen(false);
+      }, 50); 
+    }
   };
-
   return (
     <Menu as="div" className="relative inline-block ">
       {/* Wrapper to handle hover state */}
@@ -32,7 +38,7 @@ const NavDropdown = ({ title, items, setIsOpen , setIsAnyDropdownOpen}) => {
               // Keep menu open when hovering the dropdown itself
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="z-110 mt-2.5 w-55  origin-top-right rounded-md outline-none transition data-closed:scale-95 data-closed:opacity-0 backdrop-blur bg-white/10 border border-white/10  shadow-white/20 shadow-lg "
+              className="z-110 mt-1 w-55  origin-top-right rounded-md outline-none transition data-closed:scale-95 data-closed:opacity-0 backdrop-blur bg-white/10 border border-white/10  shadow-white/20 shadow-lg "
             >
               <div className="py-4">
                 {items.map((item, index) => (
