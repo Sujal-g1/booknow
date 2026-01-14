@@ -38,7 +38,7 @@ const NavDropdown = ({ title, items, setIsOpen , setIsAnyDropdownOpen}) => {
               // Keep menu open when hovering the dropdown itself
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              className="z-110 mt-1 w-55  origin-top-right rounded-md outline-none transition data-closed:scale-95 data-closed:opacity-0 backdrop-blur bg-white/10 border border-white/10  shadow-white/20 shadow-lg "
+              className="z-110 mt-2 w-55  origin-top-right rounded-md outline-none transition data-closed:scale-95 data-closed:opacity-0 backdrop-blur bg-white/10 border border-white/10  shadow-white/20 shadow-lg "
             >
               <div className="py-4">
                 {items.map((item, index) => (

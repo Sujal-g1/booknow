@@ -17,6 +17,7 @@ const [isAnyDropdownOpen, setIsAnyDropdownOpen] = useState(false);
     ? 'shadow-orange-600/40 shadow-xl'  // Color when dropdown is open
     : 'shadow-white/20 shadow-lg';   // Default color
 
+    // Authentication
   const {user} =  useUser()
   const {openSignIn} = useClerk()
 
@@ -72,15 +73,7 @@ const [isAnyDropdownOpen, setIsAnyDropdownOpen] = useState(false);
           ]} 
         />
 
-        <NavDropdown 
-          title="Favourites" 
-          setIsOpen={setIsOpen} 
-          setIsAnyDropdownOpen={setIsAnyDropdownOpen}
-          items={[
-            { label: 'Upcoming', path: '/releases' },
-            { label: 'New Arrival', path: '/releases' }
-          ]} 
-        />
+      <Link onClick={()=>{ scrollTo(0,0) , setIsOpen(false)}}  to='/favourite'>Favourites</Link>
       
 
     
@@ -91,11 +84,12 @@ const [isAnyDropdownOpen, setIsAnyDropdownOpen] = useState(false);
 
       <div className='flex items-center gap-8'>
       <SearchIcon className='max-md:hidden w-6 h-6 cursor-pointer' />
+
       {
          !user ? (
       <button
       onClick={openSignIn}
-      className='px-4 py-1 sm:px-7 sm:py-2 bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer '
+      className='px-4 py-1 sm:px-7 sm:py-2  rounded-full bg-primary hover:bg-primary-dull transition  font-medium cursor-pointer '
       >Log in</button>
          ) : 
         (
